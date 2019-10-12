@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@android:color/background_light">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,7 +10,7 @@
         android:background="@android:color/darker_gray">
 
         <ListView
-            android:id="@+id/hotels_to_buy"
+            android:id="@+id/hotels_to_build"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -24,7 +22,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buy_cancel"
+                android:id="@+id/build_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CANCEL" />

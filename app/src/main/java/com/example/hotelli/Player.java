@@ -9,15 +9,18 @@ import java.util.ArrayList;
 public class Player {
 
     int player_id = 0;
-    int funds = 0;
+    static private int players = 0;
+    int funds;
+    int plot = 0;
+    String name;
+    ArrayList<Hotel> owned_hotels;
 
     public Player(String _name, int initial_funds)
     {
-        String name = _name;
-        int id = player_id;
+        name = _name;
         funds = initial_funds;
-        player_id++;
-        ArrayList<Hotel> owned_hotels = new ArrayList<>();
-        int money = 0;
+        player_id = players;
+        players++;
+        owned_hotels = new ArrayList<>();
     }
 }
