@@ -69,6 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         raha.setText(String.valueOf(current_player.funds));
         ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
         noppa_value.setText("-");
+        printAvailableHotels();
         if (!playerRolled)
             noppa_button.setEnabled(true);
         else
@@ -120,41 +121,75 @@ public class MainActivity extends Activity implements View.OnClickListener{
     {
         final ArrayList<String> hotels = gameboard.available_hotels_str(current_player.plot);
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog alertDialog2;
         LayoutInflater inflater = getLayoutInflater();
-        final AlertDialog OptionDialog = alertDialog.create();
         View convertView = inflater.inflate(R.layout.buy_layout, null);
         alertDialog.setView(convertView);
+        alertDialog.setCancelable(true);
         alertDialog.setTitle("Select Hotel to buy");
         ListView lv = convertView.findViewById(R.id.hotels_to_buy);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, hotels);
         lv.setAdapter(adapter);
         lv.setClickable(true);
+        alertDialog.setView(convertView);
+        alertDialog2 = alertDialog.show();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 handle_buy(hotels.get(position));
+                alertDialog2.dismiss();
             }
         });
-        alertDialog.show();
+
     }
 
     void build()
     {
         final ArrayList<String> hotels = gameboard.player_buildable_hotels_str(current_player.player_id);
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog alertDialog2;
         LayoutInflater inflater = getLayoutInflater();
-        final AlertDialog OptionDialog = alertDialog.create();
         View convertView = inflater.inflate(R.layout.build_layout, null);
         alertDialog.setView(convertView);
+        alertDialog.setCancelable(true);
         alertDialog.setTitle("Select Hotel to build");
         ListView lv = convertView.findViewById(R.id.hotels_to_build);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, hotels);
         lv.setAdapter(adapter);
         lv.setClickable(true);
+        alertDialog.setView(convertView);
+        alertDialog2 = alertDialog.show();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 handle_build(hotels.get(position));
+                alertDialog2.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
+
+    void buy_entrance()
+    {
+        final ArrayList<String> hotels = gameboard.player_buildable_hotels_str(current_player.player_id);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog alertDialog2;
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = inflater.inflate(R.layout.build_layout, null);
+        alertDialog.setView(convertView);
+        alertDialog.setCancelable(true);
+        alertDialog.setTitle("Select Hotel to buy entrance");
+        ListView lv = convertView.findViewById(R.id.hotels_to_build);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, hotels);
+        lv.setAdapter(adapter);
+        lv.setClickable(true);
+        alertDialog.setView(convertView);
+        alertDialog2 = alertDialog.show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                handle_build(hotels.get(position));
+                alertDialog2.dismiss();
             }
         });
         alertDialog.show();
@@ -169,7 +204,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
             hotel.owner = current_player.player_id;
             hotel.free = false;
             current_player.funds = current_player.funds - price;
+            build_button.setEnabled(false);
             Toast.makeText(getApplicationContext(),current_player.name + " bought " + hotel_name + " with " + price,Toast.LENGTH_SHORT).show();
+            updateScreen();
         }
         catch (Exception e) {
             Toast.makeText(getApplicationContext(),"Cannot find " + hotel_name,Toast.LENGTH_SHORT).show();
@@ -214,6 +251,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     return;
             }
             hotel.build();
+            if (gameboard.get_plot(current_player.plot).type == Plot.Type.BUILD_FREE)
+            {
+                build_button.setEnabled(false);  // Can only build once for free
+            }
             current_player.funds = current_player.funds - price;
             if (current_player.funds < 0)
             {
@@ -259,9 +300,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
             current_player.plot = current_player.plot % gameboard.plots();
         };
         ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
+        if (gameboard.get_plot(current_player.plot).type == Plot.Type.FREE_ENTRANCE)
+        {
+            //free_entrance();
+        }
+        if (_prev_plot <= gameboard.entrance && current_player.plot > gameboard.entrance)
+        {
+            buy_entrance();
+        }
         if (_prev_plot <= gameboard.prize && current_player.plot > gameboard.prize)
         {
-            this.get_prize();
+            get_prize();
         }
         raha.setText(String.valueOf(current_player.funds));
         printAvailableHotels();

@@ -11,8 +11,11 @@ public class GameBoard {
 
     ArrayList<Plot> game_board_plots = new ArrayList<Plot>();
 
-    static final int __prize = 3;
+    static private final int __prize = 7;
+    static private final int __entrance = 26;
+    static private final int __plots = 31;  // from 0 -> 30
     int prize = __prize;
+    int entrance = __entrance;
     static ArrayList<Hotel> hotels = new ArrayList<Hotel>();
     Hotel boomerang;
     Hotel fujiyama;
@@ -20,11 +23,15 @@ public class GameBoard {
     Hotel royal;
     Hotel letoile;
     Hotel waikiki;
+    Hotel tajmahal;
+    Hotel safari;
 
+    ArrayList<Plot.Type> __plot_type = new ArrayList<>();
 
     public GameBoard()
     {
         create_hotels();
+        create_plots();
         Plot plot0 = new Plot(Plot.Type.NO_ACTION);
         Plot plot1 = new Plot(Plot.Type.BUY);
         Plot plot2 = new Plot(Plot.Type.BUILD);
@@ -45,38 +52,98 @@ public class GameBoard {
         add_plot(plot5);
     }
 
+    private void add_plot_types()
+    {
+        __plot_type.add(Plot.Type.NO_ACTION);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.FREE_ENTRANCE);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD_FREE);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.FREE_ENTRANCE);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.BUILD_FREE);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUILD);
+        __plot_type.add(Plot.Type.BUY);
+        __plot_type.add(Plot.Type.FREE_ENTRANCE);
+        __plot_type.add(Plot.Type.BUILD);
+    }
+    private void create_plots()
+    {
+        add_plot_types();
+        for (int i = 0; i < __plots; i++)
+        {
+            Plot _plot = new Plot(__plot_type.get(i));
+            add_plot(_plot);
+        }
+    }
     private void create_hotels()
     {
         boomerang = new Hotel("Boomerang", 150, 500);
         boomerang._rent = new int[] {100, 300, 500};
         boomerang._build_prices = new int[]{1500, 1000};
+        boomerang.plots = new  int[] {2, 3, 4, 5};
         hotels.add(boomerang);
 
         fujiyama = new Hotel("Fujiyama", 100, 1000);
         fujiyama._rent = new int[] {100, 200, 250, 350, 450};
         fujiyama._build_prices = new int[]{1000, 800, 700, 1500};
+        fujiyama.plots = new  int[] {1, 2, 3, 4, 5, 6};
         hotels.add(fujiyama);
 
         president = new Hotel("President", 250, 3000);
         president._rent = new int[] {200, 300, 400, 500, 600, 1000};
         president._build_prices = new int[]{4500, 3000, 2500, 2500, 4000};
+        president.plots = new  int[] {9, 10, 11, 12, 13, 14, 15};
         hotels.add(president);
 
         royal = new Hotel("Royal", 200, 2000);
         royal._rent = new int[] {100, 200, 250, 350, 450, 650};
         royal._build_prices = new int[]{3000, 2000, 2000, 1500, 3000};
+        royal.plots = new  int[] {11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         hotels.add(royal);
 
         letoile = new Hotel("L'etoile", 200, 3000);
         letoile._rent = new int[] {200, 300, 300, 300, 400, 500, 600};
         letoile._build_prices = new int[]{2500, 2000, 2000, 2500, 2000, 3000};
+        letoile.plots = new  int[] {8, 9, 10, 21, 22, 23, 24, 28, 29};
         hotels.add(letoile);
 
         waikiki = new Hotel("Waikiki", 200, 2000);
         waikiki._rent = new int[] {200, 250, 300, 350, 450, 650, 900};
         waikiki._build_prices = new int[]{3000, 2000, 2000, 1500, 1500, 3000};
+        waikiki.plots = new  int[] {16, 17, 18, 19, 20};
         hotels.add(waikiki);
 
+        tajmahal = new Hotel("Taj Mahal", 100, 1000);
+        tajmahal._rent = new int[] {200, 250, 300, 350, 450};
+        tajmahal._build_prices = new int[]{1000, 1500, 2000, 1500};
+        tajmahal.plots = new  int[] {21, 22, 23, 24, 25};
+        hotels.add(tajmahal);
+
+        safari = new Hotel("Safari", 150, 1500);
+        safari._rent = new int[] {200, 250, 300, 350, 450};
+        safari._build_prices = new int[]{2000, 1000, 1200, 1500};
+        safari.plots = new  int[] {26, 27, 28, 29, 30};
+        hotels.add(safari);
     }
 
     public String plot_info(int plot)

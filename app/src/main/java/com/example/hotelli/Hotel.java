@@ -18,8 +18,10 @@ public class Hotel {
     boolean free = true;
     int buildings = 0;
     boolean can_build = true;
-    ArrayList<Integer> plots = new ArrayList<Integer>();
-    ArrayList<Integer> entrances = new ArrayList<Integer>();
+    int[] plots;
+    int[] entrances;
+    // ArrayList<Integer> plots = new ArrayList<Integer>();
+    // ArrayList<Integer> entrances = new ArrayList<Integer>();
     int owner = -1;  // -1 = not owned
 
     public Hotel(String name, int entrance_price, int land_price)
