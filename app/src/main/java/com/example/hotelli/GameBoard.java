@@ -32,24 +32,6 @@ public class GameBoard {
     {
         create_hotels();
         create_plots();
-        Plot plot0 = new Plot(Plot.Type.NO_ACTION);
-        Plot plot1 = new Plot(Plot.Type.BUY);
-        Plot plot2 = new Plot(Plot.Type.BUILD);
-        Plot plot3 = new Plot(Plot.Type.BUILD_FREE);
-        Plot plot4 = new Plot(Plot.Type.FREE_ENTRANCE);
-        Plot plot5 = new Plot(Plot.Type.NO_ACTION);
-
-        plot1.hotels.add(boomerang);
-        plot2.hotels.add(fujiyama);
-        plot4.hotels.add(boomerang);
-        plot4.hotels.add(fujiyama);
-
-        add_plot(plot0);
-        add_plot(plot1);
-        add_plot(plot2);
-        add_plot(plot3);
-        add_plot(plot4);
-        add_plot(plot5);
     }
 
     private void add_plot_types()
@@ -92,6 +74,17 @@ public class GameBoard {
         for (int i = 0; i < __plots; i++)
         {
             Plot _plot = new Plot(__plot_type.get(i));
+            Iterator<Hotel> hotelIterator = hotels.iterator();
+            while (hotelIterator.hasNext()) {
+                Hotel _hotel = hotelIterator.next();
+                for (int j = 0;j < _hotel.plots.length; j++)
+                {
+                    if (_hotel.plots[j] == _plot.index)
+                    {
+                        _plot.hotels.add(_hotel);
+                    }
+                }
+            }
             add_plot(_plot);
         }
     }
@@ -164,10 +157,15 @@ public class GameBoard {
         return _plot.available_hotels();
     }
 
-    public ArrayList<Hotel> hotels(int plot)
+    public ArrayList<Hotel> hotels_in_plot(int plot)
     {
         Plot _plot = game_board_plots.get(plot);
         return _plot.hotels();
+    }
+
+    public ArrayList<Hotel> hotels_all()
+    {
+        return hotels;
     }
 
     public ArrayList<String> available_hotels_str(int plot)
@@ -210,6 +208,31 @@ public class GameBoard {
             _hotels_str.add(_hotel._name + ": " + _hotel.build_price());
         }
         return _hotels_str;
+    }
+
+    public ArrayList<String> player_buyable_entrances_str(int player)
+    {
+        ArrayList<String> _entrances_str = new ArrayList<>();
+        Iterator<Plot> plotIterator = game_board_plots.iterator();
+        while (plotIterator.hasNext()) {
+            Plot _plot = plotIterator.next();
+            if (_plot.hotels.size() == 0)
+            {
+                continue;  // No hotels_in_plot
+            }
+            if (_plot.has_entrance)
+            {
+                continue;
+            }
+            Iterator<Hotel> hotelIterator = _plot.hotels.iterator();
+            while (hotelIterator.hasNext()) {
+                Hotel _hotel = hotelIterator.next();
+                if (_hotel.owner == player && _hotel.buildings > 0) {
+                    _entrances_str.add(_hotel._name + ": " + _plot.index);
+                }
+            }
+        }
+        return _entrances_str;
     }
 
     public ArrayList<String> hotels_str(int plot)

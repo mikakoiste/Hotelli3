@@ -19,9 +19,9 @@ public class Hotel {
     int buildings = 0;
     boolean can_build = true;
     int[] plots;
-    int[] entrances;
+    // int[] entrances;
     // ArrayList<Integer> plots = new ArrayList<Integer>();
-    // ArrayList<Integer> entrances = new ArrayList<Integer>();
+    ArrayList<Integer> entrances = new ArrayList<Integer>();
     int owner = -1;  // -1 = not owned
 
     public Hotel(String name, int entrance_price, int land_price)
@@ -30,7 +30,20 @@ public class Hotel {
         _entrance_price = entrance_price;
         _land_price = land_price;
     }
+/*
+    public int[] buyable_entrances()
+    {
+        int[] buyable_entrances;
+        // Loop through all hotel plots
+        for (int i = 0; i < plots.length; i++)
+        {
+            //
+            for (int j = 0; j < entrances.length; j++){
 
+            }
+        }
+    }
+*/
     public int build_price()
     {
         return _build_prices[buildings];
@@ -48,6 +61,17 @@ public class Hotel {
     public int current_rent()
     {
         return _rent[buildings];
+    }
+
+    public String info_str()
+    {
+        StringBuilder str = new StringBuilder();
+        for (Integer elem : entrances)
+        {
+            str.append(String.valueOf(elem));
+            str.append(", ");
+        }
+        return String.format("%s:\t\t\t\t%d\t\t%d\t\t%s\n", _name, current_rent(), buildings, str.toString());
     }
 
 }

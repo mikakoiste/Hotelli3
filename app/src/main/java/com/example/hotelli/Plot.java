@@ -10,9 +10,10 @@ import java.util.Iterator;
 public class Plot {
 
     static private int __plots;
-    // List of hotels which are adjacent to this plot
+    // List of hotels_in_plot which are adjacent to this plot
     ArrayList<Hotel> hotels = new ArrayList<Hotel>();
     Boolean has_entrance = false;
+    Hotel entrance_hotel;
     int index = 0;
     Type type = Type.NO_ACTION;
 
