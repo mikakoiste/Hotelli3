@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/lauta1_smaller_jpg">
 
     <LinearLayout
         android:id="@+id/verticalLayout"
@@ -21,7 +22,7 @@
             android:text="TextView" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -29,25 +30,36 @@
                 android:id="@+id/noppa_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="ROLL" />
 
             <TextView
                 android:id="@+id/noppa_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:text="" />
+
+            <ImageView
+                android:id="@+id/noppa_imageview"
+                android:layout_width="142dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/dice1" />
 
             <TextView
                 android:id="@+id/ruutu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="center_horizontal"
                 android:text="" />
+
+            <Button
+                android:id="@+id/end_turn_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="END TURN" />
         </LinearLayout>
 
         <Button
@@ -61,12 +73,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BUY" />
-
-        <Button
-            android:id="@+id/end_turn_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="END TURN" />
 
         <TextView
             android:id="@+id/raha"

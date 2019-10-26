@@ -13,13 +13,16 @@ Bugeja:
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -42,6 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     TextView tieto;
     TextView noppa_value;
     TextView player_tv;
+    ImageView noppa_iv;
     final static int prize = 2000;
     GameBoard gameboard = new GameBoard();
     static ArrayList<Player> players = new ArrayList<>();
@@ -49,6 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Player current_player;
     boolean playerRolled = false;
     boolean already_bought = false;
+    boolean cannot_build = false;
     TextView events_tv;
 
     private static final String TAG = "MainActivity";
@@ -57,6 +62,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         noppa_button = findViewById(R.id.noppa_button);
         noppa_value = findViewById(R.id.noppa_value);
         buy_button = findViewById(R.id.buy_button);
@@ -68,6 +75,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         events_tv = findViewById(R.id.eventsText);
         end_turn_button = findViewById(R.id.end_turn_button);
         mLinearLayout = (LinearLayout) findViewById(R.id.verticalLayout);
+        noppa_iv = findViewById(R.id.noppa_imageview);
         findViewById(R.id.noppa_button).setOnClickListener(this);
         findViewById(R.id.buy_button).setOnClickListener(this);
         findViewById(R.id.build_button).setOnClickListener(this);
@@ -111,6 +119,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         current_player = players.get(next_id);
         playerRolled = false;
         already_bought = false;
+        cannot_build = false;
     }
 
     private void buy()
@@ -223,7 +232,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             hotel.free = false;
             current_player.funds = current_player.funds - price;
             already_bought = true;
-            build_button.setEnabled(false);
+            //build_button.setEnabled(false);
             Toast.makeText(getApplicationContext(),current_player.name + " bought " + hotel_name + " with " + price,Toast.LENGTH_SHORT).show();
             updateScreen();
         }
@@ -264,7 +273,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private void auction()
     {
-        Toast.makeText(getApplicationContext(), current_player.name + " BANCRUPTED!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), current_player.name + " BANKRUPTED!", Toast.LENGTH_LONG).show();
     }
 
     private void handle_build(String _hotel_str)
@@ -298,14 +307,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     break;
                 case 6:  // Not allowed to buy_button, do nothing
                     Toast.makeText(getApplicationContext(),"Rolled RED, can't build to " + hotel_name,Toast.LENGTH_SHORT).show();
+                    cannot_build = true;
+                    updateScreen();
                     return;
             }
             hotel.build();
             if (gameboard.get_plot(current_player.plot).type == Plot.Type.BUILD_FREE)
             {
-                build_button.setEnabled(false);  // Can only build once for free
+                cannot_build = true;  // Can only build once for free
             }
             current_player.funds = current_player.funds - price;
+            updateScreen();
             if (current_player.funds < 0)
             {
                 auction();
@@ -322,9 +334,34 @@ public class MainActivity extends Activity implements View.OnClickListener{
         return 1 + (int)(Math.random() * 6);
     }
 
+    private void set_dice_image(int luku)
+    {
+        switch (luku){
+            case 1:
+                noppa_iv.setImageResource(R.drawable.dice1);
+                break;
+            case 2:
+                noppa_iv.setImageResource(R.drawable.dice2);
+                break;
+            case 3:
+                noppa_iv.setImageResource(R.drawable.dice3);
+                break;
+            case 4:
+                noppa_iv.setImageResource(R.drawable.dice4);
+                break;
+            case 5:
+                noppa_iv.setImageResource(R.drawable.dice5);
+                break;
+            case 6:
+                noppa_iv.setImageResource(R.drawable.dice6);
+                break;
+        }
+    }
+
     private void move(){
         int luku = this.rollDice();
-        noppa_value.setText("Rolled " + String.valueOf(luku) + " ");
+        set_dice_image(luku);
+        // noppa_value.setText("Rolled " + String.valueOf(luku) + " ");
         events_tv.setText(String.format("%s rolled %d\n", current_player.name, luku));
         advance(luku);
         if (luku != 6)
@@ -414,8 +451,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
         Plot _current_plot = gameboard.get_plot(plot);
         if (_current_plot.type == Plot.Type.BUILD || _current_plot.type == Plot.Type.BUILD_FREE)
         {
-            if (gameboard.player_buildable_hotels(plot, current_player.player_id).size() > 0) {
+            if (gameboard.player_buildable_hotels(plot, current_player.player_id).size() > 0 && !cannot_build && playerRolled) {
                 build_button.setEnabled(true);
+            }
+            else
+            {
+                build_button.setEnabled(false);
             }
         }
         else
