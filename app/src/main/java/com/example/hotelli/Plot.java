@@ -15,6 +15,7 @@ public class Plot {
     Boolean has_entrance = false;
     Hotel entrance_hotel;
     int index = 0;
+    PlotCoords car;
     Type type = Type.NO_ACTION;
 
     public enum Type {

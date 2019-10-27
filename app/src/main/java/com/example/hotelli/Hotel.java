@@ -19,6 +19,7 @@ public class Hotel {
     int buildings = 0;
     boolean can_build = true;
     int[] plots;
+    PlotCoords info_coords;
     // int[] entrances;
     // ArrayList<Integer> plots = new ArrayList<Integer>();
     ArrayList<Integer> entrances = new ArrayList<Integer>();

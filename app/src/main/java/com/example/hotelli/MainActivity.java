@@ -17,6 +17,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -35,15 +37,13 @@ import java.util.Iterator;
 public class MainActivity extends Activity implements View.OnClickListener{
 
     private Context mContext;
-    private LinearLayout mLinearLayout;
-    Button noppa_button;
+    private RelativeLayout mRelativeLayout;
     Button buy_button;
     Button build_button;
     Button end_turn_button;
     TextView ruutu;
     TextView raha;
     TextView tieto;
-    TextView noppa_value;
     TextView player_tv;
     ImageView noppa_iv;
     final static int prize = 2000;
@@ -54,7 +54,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
     boolean playerRolled = false;
     boolean already_bought = false;
     boolean cannot_build = false;
-    TextView events_tv;
+    boolean cannot_roll = false;
+    //TextView events_tv;
+    ImageView car;
+    ImageView car2;
+    ImageView boomerang_info;
+    ImageView fujiyama_info;
+
+    ArrayList<String> clicks;
 
     private static final String TAG = "MainActivity";
 
@@ -64,40 +71,95 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        noppa_button = findViewById(R.id.noppa_button);
-        noppa_value = findViewById(R.id.noppa_value);
         buy_button = findViewById(R.id.buy_button);
         build_button = findViewById(R.id.build_button);
         ruutu = findViewById(R.id.ruutu);
         raha = findViewById(R.id.raha);
         tieto = findViewById(R.id.tieto);
         player_tv = findViewById(R.id.player_tv);
-        events_tv = findViewById(R.id.eventsText);
+        //events_tv = findViewById(R.id.eventsText);
         end_turn_button = findViewById(R.id.end_turn_button);
-        mLinearLayout = (LinearLayout) findViewById(R.id.verticalLayout);
+        mRelativeLayout = findViewById(R.id.relativeLayout);
         noppa_iv = findViewById(R.id.noppa_imageview);
-        findViewById(R.id.noppa_button).setOnClickListener(this);
-        findViewById(R.id.buy_button).setOnClickListener(this);
+        noppa_iv.bringToFront();
+        car = findViewById(R.id.car_imageview);
+        car2 = findViewById(R.id.car2_imageview);
+        boomerang_info = findViewById(R.id.boomerang_info);
+        fujiyama_info = findViewById(R.id.fujiyama_info);
+        mRelativeLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int mID = v.getId();
+                int[] values = new int[2];
+                v.getLocationOnScreen(values);
+                Log.d("X & Y",values[0]+" "+values[1]);
+            }
+        });
+        mRelativeLayout.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float[] lastTouchDownXY = new float[2];
+                // save the X,Y coordinates
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    lastTouchDownXY[0] = event.getX();
+                    lastTouchDownXY[1] = event.getY();
+                    String coords = String.format("%d: %d, %d", clicks.size(), Math.round(event.getX()), Math.round(event.getY()));
+                    clicks.add(coords);
+                }
+                // let the touch event pass on to whoever needs it
+                return false;
+            }
+        });
         findViewById(R.id.build_button).setOnClickListener(this);
         findViewById(R.id.end_turn_button).setOnClickListener(this);
+        findViewById(R.id.noppa_imageview).setOnClickListener(this);
+        clicks = new ArrayList<>();
         addPlayers();
+        addInfoIcons();
         current_player = players.get(0);
         updateScreen();
+    }
+
+    private void addInfoIcons()
+    {
+        Iterator<Hotel> hotelIterator = GameBoard.hotels.iterator();
+        while (hotelIterator.hasNext()) {
+            Hotel _hotel = hotelIterator.next();
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
+            int x = _hotel.info_coords.carX;
+            int y = _hotel.info_coords.carY;
+            layoutParams.leftMargin = x;
+            layoutParams.topMargin = y;
+            if (_hotel._name.equalsIgnoreCase("Boomerang"))
+            {
+                boomerang_info.setLayoutParams(layoutParams);
+                boomerang_info.setVisibility(View.VISIBLE);
+            }
+            else if (_hotel._name.equalsIgnoreCase("Fujiyama"))
+            {
+                fujiyama_info.setLayoutParams(layoutParams);
+                fujiyama_info.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 
     private void updateScreen(){
         player_tv.setText(current_player.name);
         raha.setText(String.valueOf(current_player.funds));
         ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
-        // noppa_value.setText("-");
         printAvailableHotels();
         set_buttons();
+        draw_car();
+        //buy_button.setVisibility(View.GONE);
+        //build_button.setVisibility(View.GONE);
     }
 
     public void onClick(View arg0) {
-        Button btn = (Button)arg0;
-        switch (btn.getId()) {
-            case R.id.noppa_button:
+        int mID = arg0.getId();
+        //Button btn = (Button)arg0;
+        switch (mID) {
+            case R.id.noppa_imageview:
                 this.move();
                 break;
             case R.id.buy_button:
@@ -358,15 +420,32 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
+    private void draw_car()
+    {
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        int x = gameboard.get_plot(current_player.plot).car.carX;
+        int y = gameboard.get_plot(current_player.plot).car.carY;
+        layoutParams.leftMargin = x;
+        layoutParams.topMargin = y;
+        if (current_player.player_id == 0) {
+            car.setLayoutParams(layoutParams);
+            car.setVisibility(View.VISIBLE);
+        }
+        if (current_player.player_id == 1) {
+            car2.setLayoutParams(layoutParams);
+            car2.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void move(){
         int luku = this.rollDice();
         set_dice_image(luku);
-        // noppa_value.setText("Rolled " + String.valueOf(luku) + " ");
-        events_tv.setText(String.format("%s rolled %d\n", current_player.name, luku));
+        //events_tv.setText(String.format("%s rolled %d\n", current_player.name, luku));
         advance(luku);
         if (luku != 6)
         {
             // Enable this for real game
+            // cannot_roll = true;
             // noppa_button.setEnabled(false);
         }
         playerRolled = true;
@@ -390,6 +469,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         {
             current_player.plot = current_player.plot % gameboard.plots();
         };
+        draw_car();
         ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
         if (gameboard.get_plot(current_player.plot).type == Plot.Type.FREE_ENTRANCE)
         {
@@ -407,7 +487,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         {
             handle_entrance_plot(gameboard.get_plot(current_player.plot));
         }
-        raha.setText(String.valueOf(current_player.funds));
+        raha.setText(String.valueOf(current_player.funds) + "€");
         printAvailableHotels();
         set_buttons();
     }
@@ -478,11 +558,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
             buy_button.setEnabled(false);
         }
         if (!playerRolled) {
-            noppa_button.setEnabled(true);
+            cannot_roll = false;
             end_turn_button.setEnabled(false);
         }
         else {
-            noppa_button.setEnabled(false);
+            cannot_roll = true;
             end_turn_button.setEnabled(true);
         }
     }

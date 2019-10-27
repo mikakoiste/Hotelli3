@@ -27,6 +27,7 @@ public class GameBoard {
     Hotel safari;
 
     ArrayList<Plot.Type> __plot_type = new ArrayList<>();
+    ArrayList<PlotCoords> __plot_coords = new ArrayList<>();
 
     public GameBoard()
     {
@@ -68,6 +69,48 @@ public class GameBoard {
         __plot_type.add(Plot.Type.FREE_ENTRANCE);
         __plot_type.add(Plot.Type.BUILD);
     }
+
+    private void add_car_coordinates(){
+        __plot_coords.add(new PlotCoords(132, 454));
+        __plot_coords.add(new PlotCoords(92, 355));
+        __plot_coords.add(new PlotCoords(111,272));
+        __plot_coords.add(new PlotCoords(167, 215));
+        __plot_coords.add(new PlotCoords(255, 173));
+        __plot_coords.add(new PlotCoords(339, 174));
+        __plot_coords.add(new PlotCoords(410, 206));
+        __plot_coords.add(new PlotCoords(506, 209));
+        __plot_coords.add(new PlotCoords(587, 180));
+        __plot_coords.add(new PlotCoords(660, 201));
+        __plot_coords.add(new PlotCoords(723, 253));
+        __plot_coords.add(new PlotCoords(809, 297));
+        __plot_coords.add(new PlotCoords(896, 323));
+        __plot_coords.add(new PlotCoords(984, 330));
+        __plot_coords.add(new PlotCoords(1066, 374));
+        __plot_coords.add(new PlotCoords(1097, 435));
+        __plot_coords.add(new PlotCoords(1090, 521));
+        __plot_coords.add(new PlotCoords(1031, 587));
+        __plot_coords.add(new PlotCoords(945, 606));
+        __plot_coords.add(new PlotCoords(860, 592));
+        __plot_coords.add(new PlotCoords(765, 564));
+        __plot_coords.add(new PlotCoords(686, 540));
+        __plot_coords.add(new PlotCoords(601, 521));
+        __plot_coords.add(new PlotCoords(526, 568));
+        __plot_coords.add(new PlotCoords(519, 648));
+        __plot_coords.add(new PlotCoords(485, 732));
+        __plot_coords.add(new PlotCoords(370, 750));
+        __plot_coords.add(new PlotCoords(316, 698));
+        __plot_coords.add(new PlotCoords(298, 615));
+        __plot_coords.add(new PlotCoords(293, 533));
+        __plot_coords.add(new PlotCoords(241, 473));
+
+        Iterator<Plot> plotIterator = game_board_plots.iterator();
+        Iterator<PlotCoords> carIterator = __plot_coords.iterator();
+        while (plotIterator.hasNext()) {
+            Plot _plot = plotIterator.next();
+            _plot.car = carIterator.next();
+        }
+    }
+
     private void create_plots()
     {
         add_plot_types();
@@ -87,55 +130,65 @@ public class GameBoard {
             }
             add_plot(_plot);
         }
+        add_car_coordinates();
     }
+
     private void create_hotels()
     {
         boomerang = new Hotel("Boomerang", 150, 500);
         boomerang._rent = new int[] {100, 300, 500};
         boomerang._build_prices = new int[]{1500, 1000};
         boomerang.plots = new  int[] {2, 3, 4, 5};
+        boomerang.info_coords = new PlotCoords(304, 75);
         hotels.add(boomerang);
 
         fujiyama = new Hotel("Fujiyama", 100, 1000);
         fujiyama._rent = new int[] {100, 200, 250, 350, 450};
         fujiyama._build_prices = new int[]{1000, 800, 700, 1500};
         fujiyama.plots = new  int[] {1, 2, 3, 4, 5, 6};
+        fujiyama.info_coords = new PlotCoords(180, 325);
         hotels.add(fujiyama);
 
         president = new Hotel("President", 250, 3000);
         president._rent = new int[] {200, 300, 400, 500, 600, 1000};
         president._build_prices = new int[]{4500, 3000, 2500, 2500, 4000};
         president.plots = new  int[] {9, 10, 11, 12, 13, 14, 15};
+        president.info_coords = new PlotCoords(781, 99);
         hotels.add(president);
 
         royal = new Hotel("Royal", 200, 2000);
         royal._rent = new int[] {100, 200, 250, 350, 450, 650};
         royal._build_prices = new int[]{3000, 2000, 2000, 1500, 3000};
         royal.plots = new  int[] {11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+        royal.info_coords = new PlotCoords(977, 419);
         hotels.add(royal);
 
         letoile = new Hotel("L'etoile", 200, 3000);
         letoile._rent = new int[] {200, 300, 300, 300, 400, 500, 600};
         letoile._build_prices = new int[]{2500, 2000, 2000, 2500, 2000, 3000};
         letoile.plots = new  int[] {8, 9, 10, 21, 22, 23, 24, 28, 29};
+        letoile.info_coords = new PlotCoords(417, 515);
         hotels.add(letoile);
 
         waikiki = new Hotel("Waikiki", 200, 2000);
         waikiki._rent = new int[] {200, 250, 300, 350, 450, 650, 900};
         waikiki._build_prices = new int[]{3000, 2000, 2000, 1500, 1500, 3000};
         waikiki.plots = new  int[] {16, 17, 18, 19, 20};
+        waikiki.info_coords = new PlotCoords(940, 697);
         hotels.add(waikiki);
 
         tajmahal = new Hotel("Taj Mahal", 100, 1000);
         tajmahal._rent = new int[] {200, 250, 300, 350, 450};
         tajmahal._build_prices = new int[]{1000, 1500, 2000, 1500};
         tajmahal.plots = new  int[] {21, 22, 23, 24, 25};
+        tajmahal.info_coords = new PlotCoords(646, 625);
         hotels.add(tajmahal);
 
         safari = new Hotel("Safari", 150, 1500);
         safari._rent = new int[] {200, 250, 300, 350, 450};
         safari._build_prices = new int[]{2000, 1000, 1200, 1500};
         safari.plots = new  int[] {26, 27, 28, 29, 30};
+        safari.info_coords = new PlotCoords(187, 624);
         hotels.add(safari);
     }
 
