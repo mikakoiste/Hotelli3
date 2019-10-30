@@ -1,5 +1,7 @@
 package com.example.hotelli;
 
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,12 @@ public class Hotel {
     boolean can_build = true;
     int[] plots;
     PlotCoords info_coords;
+    PlotCoords buy_coords;
+    PlotCoords build_coords;
+    ImageView info;
+    ImageView buy;
+    ImageView build;
+
     // int[] entrances;
     // ArrayList<Integer> plots = new ArrayList<Integer>();
     ArrayList<Integer> entrances = new ArrayList<Integer>();
@@ -45,6 +53,7 @@ public class Hotel {
         }
     }
 */
+
     public int build_price()
     {
         return _build_prices[buildings];

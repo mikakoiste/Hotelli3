@@ -14,17 +14,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -41,7 +40,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Button buy_button;
     Button build_button;
     Button end_turn_button;
-    TextView ruutu;
     TextView raha;
     TextView tieto;
     TextView player_tv;
@@ -59,7 +57,29 @@ public class MainActivity extends Activity implements View.OnClickListener{
     ImageView car;
     ImageView car2;
     ImageView boomerang_info;
+    ImageView boomerang_buy;
+    ImageView boomerang_build;
     ImageView fujiyama_info;
+    ImageView fujiyama_buy;
+    ImageView fujiyama_build;
+    ImageView president_info;
+    ImageView president_buy;
+    ImageView president_build;
+    ImageView royal_info;
+    ImageView royal_buy;
+    ImageView royal_build;
+    ImageView waikiki_info;
+    ImageView waikiki_buy;
+    ImageView waikiki_build;
+    ImageView letoile_info;
+    ImageView letoile_buy;
+    ImageView letoile_build;
+    ImageView tajmahal_info;
+    ImageView tajmahal_buy;
+    ImageView tajmahal_build;
+    ImageView safari_info;
+    ImageView safari_buy;
+    ImageView safari_build;
 
     ArrayList<String> clicks;
 
@@ -73,7 +93,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         buy_button = findViewById(R.id.buy_button);
         build_button = findViewById(R.id.build_button);
-        ruutu = findViewById(R.id.ruutu);
         raha = findViewById(R.id.raha);
         tieto = findViewById(R.id.tieto);
         player_tv = findViewById(R.id.player_tv);
@@ -82,10 +101,35 @@ public class MainActivity extends Activity implements View.OnClickListener{
         mRelativeLayout = findViewById(R.id.relativeLayout);
         noppa_iv = findViewById(R.id.noppa_imageview);
         noppa_iv.bringToFront();
+        buy_button.bringToFront();
+        build_button.bringToFront();
         car = findViewById(R.id.car_imageview);
         car2 = findViewById(R.id.car2_imageview);
         boomerang_info = findViewById(R.id.boomerang_info);
+        boomerang_buy = findViewById(R.id.boomerang_buy);
+        boomerang_build = findViewById(R.id.boomerang_build);
         fujiyama_info = findViewById(R.id.fujiyama_info);
+        fujiyama_buy = findViewById(R.id.fujiyama_buy);
+        fujiyama_build = findViewById(R.id.fujiyama_build);
+        president_info = findViewById(R.id.president_info);
+        president_buy = findViewById(R.id.president_buy);
+        president_build = findViewById(R.id.president_build);
+        royal_info = findViewById(R.id.royal_info);
+        royal_buy = findViewById(R.id.royal_buy);
+        royal_build = findViewById(R.id.royal_build);
+        waikiki_info = findViewById(R.id.waikiki_info);
+        waikiki_buy = findViewById(R.id.waikiki_buy);
+        waikiki_build = findViewById(R.id.waikiki_build);
+        letoile_info = findViewById(R.id.letoile_info);
+        letoile_buy = findViewById(R.id.letoile_buy);
+        letoile_build = findViewById(R.id.letoile_build);
+        tajmahal_info = findViewById(R.id.tajmahal_info);
+        tajmahal_buy = findViewById(R.id.tajmahal_buy);
+        tajmahal_build = findViewById(R.id.tajmahal_build);
+        safari_info = findViewById(R.id.safari_info);
+        safari_buy = findViewById(R.id.safari_buy);
+        safari_build = findViewById(R.id.safari_build);
+        /*
         mRelativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -110,12 +154,39 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 return false;
             }
         });
+        */
+        findViewById(R.id.noppa_imageview).setOnClickListener(this);
+        findViewById(R.id.buy_button).setOnClickListener(this);
         findViewById(R.id.build_button).setOnClickListener(this);
         findViewById(R.id.end_turn_button).setOnClickListener(this);
-        findViewById(R.id.noppa_imageview).setOnClickListener(this);
+        findViewById(R.id.boomerang_info).setOnClickListener(this);
+        findViewById(R.id.boomerang_buy).setOnClickListener(this);
+        findViewById(R.id.boomerang_build).setOnClickListener(this);
+        findViewById(R.id.fujiyama_info).setOnClickListener(this);
+        findViewById(R.id.fujiyama_buy).setOnClickListener(this);
+        findViewById(R.id.fujiyama_build).setOnClickListener(this);
+        findViewById(R.id.president_info).setOnClickListener(this);
+        findViewById(R.id.president_buy).setOnClickListener(this);
+        findViewById(R.id.president_build).setOnClickListener(this);
+        findViewById(R.id.royal_info).setOnClickListener(this);
+        findViewById(R.id.royal_buy).setOnClickListener(this);
+        findViewById(R.id.royal_build).setOnClickListener(this);
+        findViewById(R.id.waikiki_info).setOnClickListener(this);
+        findViewById(R.id.waikiki_buy).setOnClickListener(this);
+        findViewById(R.id.waikiki_build).setOnClickListener(this);
+        findViewById(R.id.letoile_info).setOnClickListener(this);
+        findViewById(R.id.letoile_buy).setOnClickListener(this);
+        findViewById(R.id.letoile_build).setOnClickListener(this);
+        findViewById(R.id.tajmahal_info).setOnClickListener(this);
+        findViewById(R.id.tajmahal_buy).setOnClickListener(this);
+        findViewById(R.id.tajmahal_build).setOnClickListener(this);
+        findViewById(R.id.safari_info).setOnClickListener(this);
+        findViewById(R.id.safari_buy).setOnClickListener(this);
+        findViewById(R.id.safari_build).setOnClickListener(this);
         clicks = new ArrayList<>();
         addPlayers();
         addInfoIcons();
+        addBuyAndBuildIcons();
         current_player = players.get(0);
         updateScreen();
     }
@@ -126,28 +197,189 @@ public class MainActivity extends Activity implements View.OnClickListener{
         while (hotelIterator.hasNext()) {
             Hotel _hotel = hotelIterator.next();
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
-            int x = _hotel.info_coords.carX;
-            int y = _hotel.info_coords.carY;
+            int x = _hotel.info_coords.x;
+            int y = _hotel.info_coords.y;
             layoutParams.leftMargin = x;
             layoutParams.topMargin = y;
             if (_hotel._name.equalsIgnoreCase("Boomerang"))
             {
                 boomerang_info.setLayoutParams(layoutParams);
                 boomerang_info.setVisibility(View.VISIBLE);
+                _hotel.info = boomerang_info;
+                _hotel.buy = boomerang_buy;
+                _hotel.build = boomerang_build;
             }
             else if (_hotel._name.equalsIgnoreCase("Fujiyama"))
             {
                 fujiyama_info.setLayoutParams(layoutParams);
                 fujiyama_info.setVisibility(View.VISIBLE);
+                _hotel.info = fujiyama_info;
+                _hotel.buy = fujiyama_buy;
+                _hotel.build = fujiyama_build;
             }
-
+            else if (_hotel._name.equalsIgnoreCase("President"))
+            {
+                president_info.setLayoutParams(layoutParams);
+                president_info.setVisibility(View.VISIBLE);
+                _hotel.info = president_info;
+                _hotel.buy = president_buy;
+                _hotel.build = president_build;
+            }
+            else if (_hotel._name.equalsIgnoreCase("Royal"))
+            {
+                royal_info.setLayoutParams(layoutParams);
+                royal_info.setVisibility(View.VISIBLE);
+                _hotel.info = royal_info;
+                _hotel.buy = royal_buy;
+                _hotel.build = royal_build;
+            }
+            else if (_hotel._name.equalsIgnoreCase("L'etoile"))
+            {
+                letoile_info.setLayoutParams(layoutParams);
+                letoile_info.setVisibility(View.VISIBLE);
+                _hotel.info = letoile_info;
+                _hotel.buy = letoile_buy;
+                _hotel.build = letoile_build;
+            }
+            else if (_hotel._name.equalsIgnoreCase("Waikiki"))
+            {
+                waikiki_info.setLayoutParams(layoutParams);
+                waikiki_info.setVisibility(View.VISIBLE);
+                _hotel.info = waikiki_info;
+                _hotel.buy = waikiki_buy;
+                _hotel.build = waikiki_build;
+            }
+            else if (_hotel._name.equalsIgnoreCase("Taj Mahal"))
+            {
+                tajmahal_info.setLayoutParams(layoutParams);
+                tajmahal_info.setVisibility(View.VISIBLE);
+                _hotel.info = tajmahal_info;
+                _hotel.buy = tajmahal_buy;
+                _hotel.build = tajmahal_buy;
+            }
+            else if (_hotel._name.equalsIgnoreCase("Safari"))
+            {
+                safari_info.setLayoutParams(layoutParams);
+                safari_info.setVisibility(View.VISIBLE);
+                _hotel.info = safari_info;
+                _hotel.buy = safari_buy;
+                _hotel.build = safari_build;
+            }
         }
+    }
+
+    private void gray_out(ImageView iv)
+    {
+        iv.setColorFilter(Color.argb(150,120,120,120));
+    }
+
+    private void enable_iv(ImageView iv)
+    {
+        iv.clearColorFilter();
+    }
+
+    private void addBuyAndBuildIcons()
+    {
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        RelativeLayout.LayoutParams infoLayoutParams;
+        infoLayoutParams = (RelativeLayout.LayoutParams) boomerang_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
+        layoutParams.topMargin = infoLayoutParams.topMargin - 40;
+        boomerang_buy.setLayoutParams(layoutParams);
+        boomerang_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 25;
+        boomerang_build.setLayoutParams(layoutParams);
+        boomerang_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = 150;
+        layoutParams.topMargin = 260;
+        fujiyama_buy.setLayoutParams(layoutParams);
+        fujiyama_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = 200;
+        layoutParams.topMargin = 240;
+        fujiyama_build.setLayoutParams(layoutParams);
+        fujiyama_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) president_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 25;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 50;
+        president_buy.setLayoutParams(layoutParams);
+        president_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 100;
+        president_build.setLayoutParams(layoutParams);
+        president_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) royal_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 35;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 55;
+        royal_buy.setLayoutParams(layoutParams);
+        royal_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 110;
+        royal_build.setLayoutParams(layoutParams);
+        royal_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) waikiki_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        waikiki_buy.setLayoutParams(layoutParams);
+        waikiki_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 100;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        waikiki_build.setLayoutParams(layoutParams);
+        waikiki_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) tajmahal_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        tajmahal_buy.setLayoutParams(layoutParams);
+        tajmahal_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 100;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        tajmahal_build.setLayoutParams(layoutParams);
+        tajmahal_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) letoile_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 60;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        letoile_buy.setLayoutParams(layoutParams);
+        letoile_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin + 120;
+        layoutParams.topMargin = infoLayoutParams.topMargin;
+        letoile_build.setLayoutParams(layoutParams);
+        letoile_build.setVisibility(View.VISIBLE);
+
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        infoLayoutParams = (RelativeLayout.LayoutParams) safari_info.getLayoutParams();
+        layoutParams.leftMargin = infoLayoutParams.leftMargin;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 50;
+        safari_buy.setLayoutParams(layoutParams);
+        safari_buy.setVisibility(View.VISIBLE);
+        layoutParams = new RelativeLayout.LayoutParams(150, 50);
+        layoutParams.leftMargin = infoLayoutParams.leftMargin;
+        layoutParams.topMargin = infoLayoutParams.topMargin + 100;
+        safari_build.setLayoutParams(layoutParams);
+        safari_build.setVisibility(View.VISIBLE);
     }
 
     private void updateScreen(){
         player_tv.setText(current_player.name);
         raha.setText(String.valueOf(current_player.funds));
-        ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
         printAvailableHotels();
         set_buttons();
         draw_car();
@@ -160,17 +392,67 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //Button btn = (Button)arg0;
         switch (mID) {
             case R.id.noppa_imageview:
-                this.move();
+                move();
                 break;
             case R.id.buy_button:
-                this.buy();
+                buy();
                 break;
             case R.id.build_button:
-                this.build();
+                build();
                 break;
             case R.id.end_turn_button:
-                this.end_turn();
+                end_turn();
                 break;
+            case R.id.boomerang_buy:
+                handle_buy("Boomerang");
+                break;
+            case R.id.fujiyama_buy:
+                handle_buy("Fujiyama");
+                break;
+            case R.id.president_buy:
+                handle_buy("President");
+                break;
+            case R.id.royal_buy:
+                handle_buy("Royal");
+                break;
+            case R.id.waikiki_buy:
+                handle_buy("Waikiki");
+                break;
+            case R.id.letoile_buy:
+                handle_buy("L'etoile");
+                break;
+            case R.id.tajmahal_buy:
+                handle_buy("Taj Mahal");
+                break;
+            case R.id.safari_buy:
+                handle_buy("Safari");
+                break;
+            case R.id.boomerang_build:
+                handle_build("Boomerang");
+                break;
+            case R.id.fujiyama_build:
+                handle_build("Fujiyama");
+                break;
+            case R.id.president_build:
+                handle_build("President");
+                break;
+            case R.id.royal_build:
+                handle_build("Royal");
+                break;
+            case R.id.waikiki_build:
+                handle_build("Waikiki");
+                break;
+            case R.id.letoile_build:
+                handle_build("L'etoile");
+                break;
+            case R.id.tajmahal_build:
+                handle_build("Taj Mahal");
+                break;
+            case R.id.safari_build:
+                handle_build("Safari");
+                break;
+            default:
+                return;  // Ignore and do not update screen
         }
         updateScreen();
     }
@@ -423,8 +705,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private void draw_car()
     {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        int x = gameboard.get_plot(current_player.plot).car.carX;
-        int y = gameboard.get_plot(current_player.plot).car.carY;
+        int x = gameboard.get_plot(current_player.plot).car.x;
+        int y = gameboard.get_plot(current_player.plot).car.y;
         layoutParams.leftMargin = x;
         layoutParams.topMargin = y;
         if (current_player.player_id == 0) {
@@ -470,7 +752,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
             current_player.plot = current_player.plot % gameboard.plots();
         };
         draw_car();
-        ruutu.setText("PLOT: " + String.valueOf(current_player.plot));
         if (gameboard.get_plot(current_player.plot).type == Plot.Type.FREE_ENTRANCE)
         {
             buy_entrance(true);
@@ -531,7 +812,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         Plot _current_plot = gameboard.get_plot(plot);
         if (_current_plot.type == Plot.Type.BUILD || _current_plot.type == Plot.Type.BUILD_FREE)
         {
-            if (gameboard.player_buildable_hotels(plot, current_player.player_id).size() > 0 && !cannot_build && playerRolled) {
+            if (gameboard.player_buildable_hotels(current_player.player_id).size() > 0 && !cannot_build && playerRolled) {
                 build_button.setEnabled(true);
             }
             else
@@ -543,6 +824,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
         {
             build_button.setEnabled(false);
         }
+
+        set_buy_icons(_current_plot, plot);
+        set_build_icons(_current_plot);
+
+        if (!playerRolled) {
+            cannot_roll = false;
+            end_turn_button.setEnabled(false);
+        }
+        else {
+            cannot_roll = true;
+            end_turn_button.setEnabled(true);
+        }
+    }
+
+    private void set_buy_icons(Plot _current_plot, int plot)
+    {
         if (_current_plot.type == Plot.Type.BUY) {
             // If there are no hotels_in_plot to buy or have already bought, disable buy
             if (gameboard.available_hotels(plot).size() == 0 || already_bought) {
@@ -557,13 +854,41 @@ public class MainActivity extends Activity implements View.OnClickListener{
         {
             buy_button.setEnabled(false);
         }
-        if (!playerRolled) {
-            cannot_roll = false;
-            end_turn_button.setEnabled(false);
+        for (Hotel _hotel : GameBoard.hotels)
+        {
+            gray_out(_hotel.buy);
         }
-        else {
-            cannot_roll = true;
-            end_turn_button.setEnabled(true);
+        if (already_bought || !playerRolled)
+        {
+            return;  // Leave all dimmed
+        }
+        for (Hotel _hotel : _current_plot.hotels)
+        {
+            if (_current_plot.type == Plot.Type.BUY && _hotel.free)
+            {
+                enable_iv(_hotel.buy);
+            }
+        }
+    }
+
+    private void set_build_icons(Plot _current_plot)
+    {
+        for (Hotel _hotel : GameBoard.hotels)
+        {
+            gray_out(_hotel.build);
+        }
+        if (_current_plot.type != Plot.Type.BUILD && _current_plot.type != Plot.Type.BUILD_FREE)
+        {
+            return;
+        }
+        if (!playerRolled || cannot_build)
+        {
+            return;
+        }
+        ArrayList<Hotel> _hotels = gameboard.player_buildable_hotels(current_player.player_id);
+        for (Hotel _hotel : _hotels)
+        {
+            enable_iv(_hotel.build);
         }
     }
 

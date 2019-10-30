@@ -139,14 +139,16 @@ public class GameBoard {
         boomerang._rent = new int[] {100, 300, 500};
         boomerang._build_prices = new int[]{1500, 1000};
         boomerang.plots = new  int[] {2, 3, 4, 5};
-        boomerang.info_coords = new PlotCoords(304, 75);
+        boomerang.info_coords = new PlotCoords(254, 75);
+        boomerang.buy_coords = new PlotCoords(354, 75);
+        boomerang.build_coords = new PlotCoords(354, 45);
         hotels.add(boomerang);
 
         fujiyama = new Hotel("Fujiyama", 100, 1000);
         fujiyama._rent = new int[] {100, 200, 250, 350, 450};
         fujiyama._build_prices = new int[]{1000, 800, 700, 1500};
         fujiyama.plots = new  int[] {1, 2, 3, 4, 5, 6};
-        fujiyama.info_coords = new PlotCoords(180, 325);
+        fujiyama.info_coords = new PlotCoords(175, 340);
         hotels.add(fujiyama);
 
         president = new Hotel("President", 250, 3000);
@@ -167,28 +169,28 @@ public class GameBoard {
         letoile._rent = new int[] {200, 300, 300, 300, 400, 500, 600};
         letoile._build_prices = new int[]{2500, 2000, 2000, 2500, 2000, 3000};
         letoile.plots = new  int[] {8, 9, 10, 21, 22, 23, 24, 28, 29};
-        letoile.info_coords = new PlotCoords(417, 515);
+        letoile.info_coords = new PlotCoords(360, 515);
         hotels.add(letoile);
 
         waikiki = new Hotel("Waikiki", 200, 2000);
         waikiki._rent = new int[] {200, 250, 300, 350, 450, 650, 900};
         waikiki._build_prices = new int[]{3000, 2000, 2000, 1500, 1500, 3000};
         waikiki.plots = new  int[] {16, 17, 18, 19, 20};
-        waikiki.info_coords = new PlotCoords(940, 697);
+        waikiki.info_coords = new PlotCoords(820, 670);
         hotels.add(waikiki);
 
         tajmahal = new Hotel("Taj Mahal", 100, 1000);
         tajmahal._rent = new int[] {200, 250, 300, 350, 450};
         tajmahal._build_prices = new int[]{1000, 1500, 2000, 1500};
         tajmahal.plots = new  int[] {21, 22, 23, 24, 25};
-        tajmahal.info_coords = new PlotCoords(646, 625);
+        tajmahal.info_coords = new PlotCoords(595, 625);
         hotels.add(tajmahal);
 
         safari = new Hotel("Safari", 150, 1500);
         safari._rent = new int[] {200, 250, 300, 350, 450};
         safari._build_prices = new int[]{2000, 1000, 1200, 1500};
         safari.plots = new  int[] {26, 27, 28, 29, 30};
-        safari.info_coords = new PlotCoords(187, 624);
+        safari.info_coords = new PlotCoords(200, 624);
         hotels.add(safari);
     }
 
@@ -233,7 +235,7 @@ public class GameBoard {
         return _plot.player_hotels(player, false);
     }
 
-    public ArrayList<Hotel> player_buildable_hotels(int plot, int player)
+    public ArrayList<Hotel> player_buildable_hotels(int player)
     {
         ArrayList<Hotel> _hotels = new ArrayList<>();
         Iterator<Hotel> hotelIterator = hotels.iterator();
