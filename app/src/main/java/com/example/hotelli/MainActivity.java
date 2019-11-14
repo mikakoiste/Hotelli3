@@ -57,29 +57,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     ImageView car;
     ImageView car2;
     ImageView boomerang_info;
-    ImageView boomerang_buy;
-    ImageView boomerang_build;
     ImageView fujiyama_info;
-    ImageView fujiyama_buy;
-    ImageView fujiyama_build;
     ImageView president_info;
-    ImageView president_buy;
-    ImageView president_build;
     ImageView royal_info;
-    ImageView royal_buy;
-    ImageView royal_build;
     ImageView waikiki_info;
-    ImageView waikiki_buy;
-    ImageView waikiki_build;
     ImageView letoile_info;
-    ImageView letoile_buy;
-    ImageView letoile_build;
     ImageView tajmahal_info;
-    ImageView tajmahal_buy;
-    ImageView tajmahal_build;
     ImageView safari_info;
-    ImageView safari_buy;
-    ImageView safari_build;
 
     ArrayList<String> clicks;
 
@@ -106,29 +90,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
         car = findViewById(R.id.car_imageview);
         car2 = findViewById(R.id.car2_imageview);
         boomerang_info = findViewById(R.id.boomerang_info);
-        boomerang_buy = findViewById(R.id.boomerang_buy);
-        boomerang_build = findViewById(R.id.boomerang_build);
         fujiyama_info = findViewById(R.id.fujiyama_info);
-        fujiyama_buy = findViewById(R.id.fujiyama_buy);
-        fujiyama_build = findViewById(R.id.fujiyama_build);
         president_info = findViewById(R.id.president_info);
-        president_buy = findViewById(R.id.president_buy);
-        president_build = findViewById(R.id.president_build);
         royal_info = findViewById(R.id.royal_info);
-        royal_buy = findViewById(R.id.royal_buy);
-        royal_build = findViewById(R.id.royal_build);
         waikiki_info = findViewById(R.id.waikiki_info);
-        waikiki_buy = findViewById(R.id.waikiki_buy);
-        waikiki_build = findViewById(R.id.waikiki_build);
         letoile_info = findViewById(R.id.letoile_info);
-        letoile_buy = findViewById(R.id.letoile_buy);
-        letoile_build = findViewById(R.id.letoile_build);
         tajmahal_info = findViewById(R.id.tajmahal_info);
-        tajmahal_buy = findViewById(R.id.tajmahal_buy);
-        tajmahal_build = findViewById(R.id.tajmahal_build);
         safari_info = findViewById(R.id.safari_info);
-        safari_buy = findViewById(R.id.safari_buy);
-        safari_build = findViewById(R.id.safari_build);
         /*
         mRelativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -160,33 +128,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
         findViewById(R.id.build_button).setOnClickListener(this);
         findViewById(R.id.end_turn_button).setOnClickListener(this);
         findViewById(R.id.boomerang_info).setOnClickListener(this);
-        findViewById(R.id.boomerang_buy).setOnClickListener(this);
-        findViewById(R.id.boomerang_build).setOnClickListener(this);
         findViewById(R.id.fujiyama_info).setOnClickListener(this);
-        findViewById(R.id.fujiyama_buy).setOnClickListener(this);
-        findViewById(R.id.fujiyama_build).setOnClickListener(this);
         findViewById(R.id.president_info).setOnClickListener(this);
-        findViewById(R.id.president_buy).setOnClickListener(this);
-        findViewById(R.id.president_build).setOnClickListener(this);
         findViewById(R.id.royal_info).setOnClickListener(this);
-        findViewById(R.id.royal_buy).setOnClickListener(this);
-        findViewById(R.id.royal_build).setOnClickListener(this);
         findViewById(R.id.waikiki_info).setOnClickListener(this);
-        findViewById(R.id.waikiki_buy).setOnClickListener(this);
-        findViewById(R.id.waikiki_build).setOnClickListener(this);
         findViewById(R.id.letoile_info).setOnClickListener(this);
-        findViewById(R.id.letoile_buy).setOnClickListener(this);
-        findViewById(R.id.letoile_build).setOnClickListener(this);
         findViewById(R.id.tajmahal_info).setOnClickListener(this);
-        findViewById(R.id.tajmahal_buy).setOnClickListener(this);
-        findViewById(R.id.tajmahal_build).setOnClickListener(this);
         findViewById(R.id.safari_info).setOnClickListener(this);
-        findViewById(R.id.safari_buy).setOnClickListener(this);
-        findViewById(R.id.safari_build).setOnClickListener(this);
         clicks = new ArrayList<>();
         addPlayers();
         addInfoIcons();
-        addBuyAndBuildIcons();
         current_player = players.get(0);
         updateScreen();
     }
@@ -206,64 +157,48 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 boomerang_info.setLayoutParams(layoutParams);
                 boomerang_info.setVisibility(View.VISIBLE);
                 _hotel.info = boomerang_info;
-                _hotel.buy = boomerang_buy;
-                _hotel.build = boomerang_build;
             }
             else if (_hotel._name.equalsIgnoreCase("Fujiyama"))
             {
                 fujiyama_info.setLayoutParams(layoutParams);
                 fujiyama_info.setVisibility(View.VISIBLE);
                 _hotel.info = fujiyama_info;
-                _hotel.buy = fujiyama_buy;
-                _hotel.build = fujiyama_build;
             }
             else if (_hotel._name.equalsIgnoreCase("President"))
             {
                 president_info.setLayoutParams(layoutParams);
                 president_info.setVisibility(View.VISIBLE);
                 _hotel.info = president_info;
-                _hotel.buy = president_buy;
-                _hotel.build = president_build;
             }
             else if (_hotel._name.equalsIgnoreCase("Royal"))
             {
                 royal_info.setLayoutParams(layoutParams);
                 royal_info.setVisibility(View.VISIBLE);
                 _hotel.info = royal_info;
-                _hotel.buy = royal_buy;
-                _hotel.build = royal_build;
             }
             else if (_hotel._name.equalsIgnoreCase("L'etoile"))
             {
                 letoile_info.setLayoutParams(layoutParams);
                 letoile_info.setVisibility(View.VISIBLE);
                 _hotel.info = letoile_info;
-                _hotel.buy = letoile_buy;
-                _hotel.build = letoile_build;
             }
             else if (_hotel._name.equalsIgnoreCase("Waikiki"))
             {
                 waikiki_info.setLayoutParams(layoutParams);
                 waikiki_info.setVisibility(View.VISIBLE);
                 _hotel.info = waikiki_info;
-                _hotel.buy = waikiki_buy;
-                _hotel.build = waikiki_build;
             }
             else if (_hotel._name.equalsIgnoreCase("Taj Mahal"))
             {
                 tajmahal_info.setLayoutParams(layoutParams);
                 tajmahal_info.setVisibility(View.VISIBLE);
                 _hotel.info = tajmahal_info;
-                _hotel.buy = tajmahal_buy;
-                _hotel.build = tajmahal_buy;
             }
             else if (_hotel._name.equalsIgnoreCase("Safari"))
             {
                 safari_info.setLayoutParams(layoutParams);
                 safari_info.setVisibility(View.VISIBLE);
                 _hotel.info = safari_info;
-                _hotel.buy = safari_buy;
-                _hotel.build = safari_build;
             }
         }
     }
@@ -276,105 +211,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private void enable_iv(ImageView iv)
     {
         iv.clearColorFilter();
-    }
-
-    private void addBuyAndBuildIcons()
-    {
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        RelativeLayout.LayoutParams infoLayoutParams;
-        infoLayoutParams = (RelativeLayout.LayoutParams) boomerang_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
-        layoutParams.topMargin = infoLayoutParams.topMargin - 40;
-        boomerang_buy.setLayoutParams(layoutParams);
-        boomerang_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 25;
-        boomerang_build.setLayoutParams(layoutParams);
-        boomerang_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = 150;
-        layoutParams.topMargin = 260;
-        fujiyama_buy.setLayoutParams(layoutParams);
-        fujiyama_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = 200;
-        layoutParams.topMargin = 240;
-        fujiyama_build.setLayoutParams(layoutParams);
-        fujiyama_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) president_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 25;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 50;
-        president_buy.setLayoutParams(layoutParams);
-        president_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 100;
-        president_build.setLayoutParams(layoutParams);
-        president_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) royal_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 35;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 55;
-        royal_buy.setLayoutParams(layoutParams);
-        royal_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 110;
-        royal_build.setLayoutParams(layoutParams);
-        royal_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) waikiki_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        waikiki_buy.setLayoutParams(layoutParams);
-        waikiki_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 100;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        waikiki_build.setLayoutParams(layoutParams);
-        waikiki_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) tajmahal_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 50;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        tajmahal_buy.setLayoutParams(layoutParams);
-        tajmahal_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 100;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        tajmahal_build.setLayoutParams(layoutParams);
-        tajmahal_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) letoile_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 60;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        letoile_buy.setLayoutParams(layoutParams);
-        letoile_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin + 120;
-        layoutParams.topMargin = infoLayoutParams.topMargin;
-        letoile_build.setLayoutParams(layoutParams);
-        letoile_build.setVisibility(View.VISIBLE);
-
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        infoLayoutParams = (RelativeLayout.LayoutParams) safari_info.getLayoutParams();
-        layoutParams.leftMargin = infoLayoutParams.leftMargin;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 50;
-        safari_buy.setLayoutParams(layoutParams);
-        safari_buy.setVisibility(View.VISIBLE);
-        layoutParams = new RelativeLayout.LayoutParams(150, 50);
-        layoutParams.leftMargin = infoLayoutParams.leftMargin;
-        layoutParams.topMargin = infoLayoutParams.topMargin + 100;
-        safari_build.setLayoutParams(layoutParams);
-        safari_build.setVisibility(View.VISIBLE);
     }
 
     private void updateScreen(){
@@ -403,53 +239,29 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.end_turn_button:
                 end_turn();
                 break;
-            case R.id.boomerang_buy:
-                handle_buy("Boomerang");
+            case R.id.boomerang_info:
+                handle_icon_click("Boomerang");
                 break;
-            case R.id.fujiyama_buy:
-                handle_buy("Fujiyama");
+            case R.id.fujiyama_info:
+                handle_icon_click("Fujiyama");
                 break;
-            case R.id.president_buy:
-                handle_buy("President");
+            case R.id.president_info:
+                handle_icon_click("President");
                 break;
-            case R.id.royal_buy:
-                handle_buy("Royal");
+            case R.id.royal_info:
+                handle_icon_click("Royal");
                 break;
-            case R.id.waikiki_buy:
-                handle_buy("Waikiki");
+            case R.id.waikiki_info:
+                handle_icon_click("Waikiki");
                 break;
-            case R.id.letoile_buy:
-                handle_buy("L'etoile");
+            case R.id.letoile_info:
+                handle_icon_click("L'etoile");
                 break;
-            case R.id.tajmahal_buy:
-                handle_buy("Taj Mahal");
+            case R.id.tajmahal_info:
+                handle_icon_click("Taj Mahal");
                 break;
-            case R.id.safari_buy:
-                handle_buy("Safari");
-                break;
-            case R.id.boomerang_build:
-                handle_build("Boomerang");
-                break;
-            case R.id.fujiyama_build:
-                handle_build("Fujiyama");
-                break;
-            case R.id.president_build:
-                handle_build("President");
-                break;
-            case R.id.royal_build:
-                handle_build("Royal");
-                break;
-            case R.id.waikiki_build:
-                handle_build("Waikiki");
-                break;
-            case R.id.letoile_build:
-                handle_build("L'etoile");
-                break;
-            case R.id.tajmahal_build:
-                handle_build("Taj Mahal");
-                break;
-            case R.id.safari_build:
-                handle_build("Safari");
+            case R.id.safari_info:
+                handle_icon_click("Safari");
                 break;
             default:
                 return;  // Ignore and do not update screen
@@ -566,12 +378,45 @@ public class MainActivity extends Activity implements View.OnClickListener{
         });
     }
 
+    private void handle_icon_click(String _hotel_str) {
+        String hotel_name = _hotel_str.split(":")[0];
+        try {
+            Hotel hotel = GameBoard.get_hotel_by_name(hotel_name);
+            if (hotel.hotel_icon_mode == Plot.Type.BUY)
+            {
+                handle_buy(_hotel_str);
+            }
+            else if (hotel.hotel_icon_mode == Plot.Type.NO_ACTION)
+            {
+                handle_info(_hotel_str);
+            }
+            else if (hotel.hotel_icon_mode == Plot.Type.BUILD)
+            {
+                handle_build(_hotel_str);
+            }
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(),"Cannot find " + hotel_name,Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
+
+    private void handle_info(String _hotel_str)
+    {
+
+    }
+
     private void handle_buy(String _hotel_str)
     {
         String hotel_name = _hotel_str.split(":")[0];
         try {
             Hotel hotel = GameBoard.get_hotel_by_name(hotel_name);
             int price = hotel._land_price;
+            if (price > current_player.funds)
+            {
+                Toast.makeText(getApplicationContext(),"Not enough money to buy " + hotel_name,Toast.LENGTH_SHORT).show();
+                return;
+            }
             hotel.owner = current_player.player_id;
             hotel.free = false;
             current_player.funds = current_player.funds - price;
@@ -721,8 +566,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private void move(){
         int luku = this.rollDice();
+        luku = 1;
         set_dice_image(luku);
         //events_tv.setText(String.format("%s rolled %d\n", current_player.name, luku));
+        playerRolled = true;
         advance(luku);
         if (luku != 6)
         {
@@ -730,7 +577,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
             // cannot_roll = true;
             // noppa_button.setEnabled(false);
         }
-        playerRolled = true;
     }
 
     private void addPlayers(){
@@ -825,8 +671,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             build_button.setEnabled(false);
         }
 
-        set_buy_icons(_current_plot, plot);
-        set_build_icons(_current_plot);
+        set_icons(_current_plot, plot);
 
         if (!playerRolled) {
             cannot_roll = false;
@@ -838,7 +683,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    private void set_buy_icons(Plot _current_plot, int plot)
+    private void set_icons(Plot _current_plot, int plot)
     {
         if (_current_plot.type == Plot.Type.BUY) {
             // If there are no hotels_in_plot to buy or have already bought, disable buy
@@ -854,41 +699,36 @@ public class MainActivity extends Activity implements View.OnClickListener{
         {
             buy_button.setEnabled(false);
         }
-        for (Hotel _hotel : GameBoard.hotels)
-        {
-            gray_out(_hotel.buy);
-        }
-        if (already_bought || !playerRolled)
-        {
-            return;  // Leave all dimmed
-        }
         for (Hotel _hotel : _current_plot.hotels)
         {
-            if (_current_plot.type == Plot.Type.BUY && _hotel.free)
+            if (already_bought || !playerRolled)
             {
-                enable_iv(_hotel.buy);
+                _hotel.info.setImageResource(R.drawable.info_small_png);
+                _hotel.hotel_icon_mode = Plot.Type.NO_ACTION;
             }
-        }
-    }
-
-    private void set_build_icons(Plot _current_plot)
-    {
-        for (Hotel _hotel : GameBoard.hotels)
-        {
-            gray_out(_hotel.build);
-        }
-        if (_current_plot.type != Plot.Type.BUILD && _current_plot.type != Plot.Type.BUILD_FREE)
-        {
-            return;
-        }
-        if (!playerRolled || cannot_build)
-        {
-            return;
-        }
-        ArrayList<Hotel> _hotels = gameboard.player_buildable_hotels(current_player.player_id);
-        for (Hotel _hotel : _hotels)
-        {
-            enable_iv(_hotel.build);
+            else if (_current_plot.type == Plot.Type.BUY && _hotel.free)
+            {
+                _hotel.info.setImageResource(R.drawable.buy_png);
+                _hotel.hotel_icon_mode = Plot.Type.BUY;
+            }
+            else if (_current_plot.type == Plot.Type.BUILD || _current_plot.type == Plot.Type.BUILD_FREE)
+            {
+                if (_hotel.player_can_build(current_player.player_id))
+                {
+                    _hotel.info.setImageResource(R.drawable.building);
+                    _hotel.hotel_icon_mode = Plot.Type.BUILD;
+                }
+                else
+                {
+                    _hotel.info.setImageResource(R.drawable.info_small_png);
+                    _hotel.hotel_icon_mode = Plot.Type.NO_ACTION;
+                }
+            }
+            else
+            {
+                _hotel.info.setImageResource(R.drawable.info_small_png);
+                _hotel.hotel_icon_mode = Plot.Type.NO_ACTION;
+            }
         }
     }
 

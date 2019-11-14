@@ -112,39 +112,11 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/boomerang_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/boomerang_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
-
-        <ImageView
             android:id="@+id/fujiyama_info"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/info_small_png"
             android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/fujiyama_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/fujiyama_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/president_info"
@@ -154,39 +126,11 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/president_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/president_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
-
-        <ImageView
             android:id="@+id/royal_info"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/info_small_png"
             android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/royal_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/royal_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/waikiki_info"
@@ -196,39 +140,11 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/waikiki_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/waikiki_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
-
-        <ImageView
             android:id="@+id/letoile_info"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/info_small_png"
             android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/letoile_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/letoile_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/tajmahal_info"
@@ -238,39 +154,11 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/tajmahal_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/tajmahal_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
-
-        <ImageView
             android:id="@+id/safari_info"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/info_small_png"
             android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/safari_buy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/buy_png"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/safari_build"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/building"
-            android:visibility="visible" />
 
     </RelativeLayout>
 

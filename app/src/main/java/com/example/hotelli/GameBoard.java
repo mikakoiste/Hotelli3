@@ -140,8 +140,6 @@ public class GameBoard {
         boomerang._build_prices = new int[]{1500, 1000};
         boomerang.plots = new  int[] {2, 3, 4, 5};
         boomerang.info_coords = new PlotCoords(254, 75);
-        boomerang.buy_coords = new PlotCoords(354, 75);
-        boomerang.build_coords = new PlotCoords(354, 45);
         hotels.add(boomerang);
 
         fujiyama = new Hotel("Fujiyama", 100, 1000);

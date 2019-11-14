@@ -21,12 +21,9 @@ public class Hotel {
     int buildings = 0;
     boolean can_build = true;
     int[] plots;
+    Plot.Type hotel_icon_mode = Plot.Type.NO_ACTION;
     PlotCoords info_coords;
-    PlotCoords buy_coords;
-    PlotCoords build_coords;
     ImageView info;
-    ImageView buy;
-    ImageView build;
 
     // int[] entrances;
     // ArrayList<Integer> plots = new ArrayList<Integer>();
@@ -53,6 +50,19 @@ public class Hotel {
         }
     }
 */
+
+    public boolean player_can_build(int player_id)
+    {
+        if (player_id != owner)
+        {
+            return false;  // Not owner
+        }
+        if (!can_build)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public int build_price()
     {
